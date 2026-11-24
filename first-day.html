@@ -7,150 +7,245 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Geist:wght@600;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Geist:wght@500;700;800&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  /* MangoBoost Brand Guidelines v2.0 */
+  /* MangoBoost Brand Guidelines v2.0
+     Geist = headings / numbers, DM Sans = body (160%), Navy + Mango, Silver lines */
   :root {
     --mango: #FFB81C;
-    --grad-a: #FFD940;
-    --grad-b: #F26B14;
+    --grad: linear-gradient(90deg, #FFD940, #F26B14);
     --gray: #4D4A49;
     --navy: #15182D;
+    --navy-2: #262A40;
     --silver: #D8D9E4;
     --pale: #F1F1F5;
     --tint: #FFF8E8;
-    --muted: #7A7776;
     --head: "Geist", "Noto Sans KR", Arial, sans-serif;
     --text: "DM Sans", "Noto Sans KR", Arial, sans-serif;
   }
   * { box-sizing: border-box; }
+  html { background: var(--navy); }
   body {
     margin: 0;
-    background: var(--pale);
+    background: #fff;
     color: var(--gray);
     font-family: var(--text);
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    padding: env(safe-area-inset-top, 0px) 16px env(safe-area-inset-bottom, 0px);
   }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 0 56px; }
-  .bar { height: 4px; background: var(--mango); background-image: linear-gradient(90deg, var(--grad-a), var(--grad-b)); }
-  header { background: #fff; border: 1px solid var(--silver); border-top: 0; padding: 32px 28px 28px; }
-  .eyebrow { font-family: var(--head); font-weight: 600; font-size: 13px; letter-spacing: 0.02em; color: var(--gray); margin: 0 0 8px; }
-  h1 { font-family: var(--head); font-weight: 700; font-size: clamp(24px, 6vw, 30px); line-height: 1.3; letter-spacing: -0.01em; color: var(--navy); margin: 0 0 10px; word-break: keep-all; }
-  .intro { margin: 0; word-break: keep-all; }
 
-  ol.scenes { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; }
-  .scene { background: #fff; border: 1px solid var(--silver); border-left: 4px solid var(--mango); padding: 20px 22px; }
-  .scene.team { background: var(--tint); }
-  .scene .label { font-family: var(--head); font-weight: 600; font-size: 13px; color: var(--gray); margin: 0 0 2px; }
-  .scene h2 { font-family: var(--head); font-weight: 700; font-size: 19px; line-height: 1.4; letter-spacing: -0.01em; color: var(--navy); margin: 0 0 12px; word-break: keep-all; }
-  .time { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 0 0 8px; }
-  .time b { font-family: var(--head); font-weight: 700; color: var(--navy); white-space: nowrap; }
-  .time span { font-weight: 700; color: var(--navy); }
-  .scene p { margin: 0 0 8px; word-break: keep-all; }
-  .scene p:last-child { margin-bottom: 0; }
-  .scene .sub { border-top: 1px solid var(--silver); margin-top: 14px; padding-top: 14px; }
-  .note { font-size: 14px; color: var(--muted); }
+  /* ---------- hero ---------- */
+  .hero {
+    background: var(--navy);
+    color: #fff;
+    padding: calc(56px + env(safe-area-inset-top, 0px)) 24px 64px;
+    text-align: center;
+  }
+  .hero img { width: 96px; height: auto; display: block; margin: 0 auto 36px; }
+  .kicker { font-family: var(--head); font-weight: 700; font-size: 12px; letter-spacing: 0.24em; color: var(--mango); margin: 0 0 14px; }
+  .hero h1 {
+    font-family: var(--head); font-weight: 800; letter-spacing: -0.01em;
+    font-size: clamp(30px, 7.5vw, 46px); line-height: 1.2;
+    margin: 0 auto 16px; max-width: 12em; word-break: keep-all;
+  }
+  .hero p { margin: 0 auto; max-width: 30em; color: var(--silver); word-break: keep-all; }
+  .stripe { height: 6px; background: var(--mango); background-image: var(--grad); }
 
-  footer { margin-top: 28px; text-align: center; font-size: 13px; color: var(--muted); }
-  footer a { color: var(--navy); }
+  /* ---------- timeline ---------- */
+  main { max-width: 760px; margin: 0 auto; padding: 56px 20px 72px; }
+  .scenes { list-style: none; margin: 0; padding: 0; }
+  .scene {
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    column-gap: 20px;
+    position: relative;
+    padding-bottom: 48px;
+  }
+  .scene::before {             /* 세로 타임라인 */
+    content: ""; position: absolute; left: 37px; top: 64px; bottom: 8px;
+    width: 2px; background: var(--silver);
+  }
+  .scene:last-child { padding-bottom: 0; }
+  .scene:last-child::before { display: none; }
+  .num {
+    font-family: var(--head); font-weight: 800; font-size: 52px; line-height: 1;
+    letter-spacing: -0.03em; color: var(--navy); text-align: center;
+  }
+  .num small { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--gray); margin-bottom: 6px; }
+  .scene.team .num { color: var(--navy); }
+  .scene.team .num::after {
+    content: ""; display: block; width: 28px; height: 4px; margin: 10px auto 0;
+    background: var(--mango); background-image: var(--grad);
+  }
+  .body h2 {
+    font-family: var(--head); font-weight: 700; font-size: 22px; line-height: 1.35;
+    letter-spacing: -0.01em; color: var(--navy); margin: 4px 0 14px; word-break: keep-all;
+  }
+  .slot { margin: 0 0 12px; padding: 14px 0 0; border-top: 2px solid var(--navy); }
+  .slot + .slot { margin-top: 20px; }
+  .when { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; margin: 0 0 8px; }
+  .when b { font-family: var(--head); font-weight: 700; font-size: 18px; color: var(--navy); white-space: nowrap; }
+  .when span { font-weight: 700; color: var(--navy); }
+  .body p { margin: 0 0 8px; word-break: keep-all; }
+  .body p:last-child { margin-bottom: 0; }
+  .tag {
+    display: inline-block; font-family: var(--head); font-weight: 700; font-size: 11px;
+    letter-spacing: 0.16em; color: var(--navy); background: var(--tint);
+    padding: 4px 8px; margin: 0 0 10px;
+  }
+  .note { font-size: 14px; color: #7A7776; }
+
+  /* ---------- end ---------- */
+  .end { background: var(--navy); color: var(--silver); text-align: center; padding: 48px 24px calc(48px + env(safe-area-inset-bottom, 0px)); }
+  .end strong { display: block; font-family: var(--head); font-weight: 800; font-size: 24px; color: #fff; margin-bottom: 10px; }
+  .end a { color: var(--mango); }
+
+  @media (max-width: 480px) {
+    .scene { grid-template-columns: 52px 1fr; column-gap: 14px; }
+    .scene::before { left: 25px; top: 52px; }
+    .num { font-size: 38px; }
+    .body h2 { font-size: 19px; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="bar"></div>
-  <header>
-    <p class="eyebrow">MangoBoost HR팀</p>
-    <h1>망고부스터의 첫 출근 날 예고편</h1>
-    <p class="intro">첫날 어떤 하루를 보내게 될지, 장면별로 미리 보여 드릴게요.</p>
-  </header>
 
+<header class="hero">
+  <img src="logo_vertical_mango.png" alt="MangoBoost">
+  <p class="kicker">DAY ONE PREVIEW</p>
+  <h1>망고부스터의 첫 출근 날 예고편</h1>
+  <p>첫날 어떤 하루를 보내게 될지, 장면별로 미리 보여 드릴게요.</p>
+</header>
+<div class="stripe"></div>
+
+<main>
   <ol class="scenes">
     <li class="scene">
-      <p class="label">Scene 1</p>
-      <h2>6층 문이 열리면 ☕</h2>
-      <p class="time"><b>09:20</b><span>무사히 도착하기</span></p>
-      <p>6층에 도착해서 연락 주시면 온보딩 담당자가 출입문을 열어드립니다.</p>
-      <p>온보딩은 오전 9시 30분에 시작합니다. 서두르지 마시고, 커피 한 잔 내리면서 숨을 골라 보세요.</p>
+      <div class="num"><small>SCENE</small>01</div>
+      <div class="body">
+        <h2>6층 문이 열리면 ☕</h2>
+        <div class="slot">
+          <p class="when"><b>09:20</b><span>무사히 도착하기</span></p>
+          <p>6층에 도착해서 연락 주시면 온보딩 담당자가 출입문을 열어드립니다.</p>
+          <p>온보딩은 오전 9시 30분에 시작합니다. 서두르지 마시고, 커피 한 잔 내리면서 숨을 골라 보세요.</p>
+        </div>
+      </div>
     </li>
 
     <li class="scene">
-      <p class="label">Scene 2</p>
-      <h2>우리는 이런 회사입니다 🏢</h2>
-      <p class="time"><b>09:30 – 10:00</b><span>MangoBoost와 인사 나누기</span></p>
-      <p>HR팀과 마주 앉아 반가운 환영 인사를 나눕니다.</p>
-      <p>오시는 길은 괜찮았는지, 입사 전 궁금했던 건 없었는지 편하게 이야기 나누고, 이어서 MangoBoost에서 함께 일하기 위해 알아 두면 좋은 Basic Rules를 안내해 드립니다.</p>
-      <p>이날 자료는 공유 파일로 모두 드리니, 편하게 들어 주세요.</p>
+      <div class="num"><small>SCENE</small>02</div>
+      <div class="body">
+        <h2>우리는 이런 회사입니다 🏢</h2>
+        <div class="slot">
+          <p class="when"><b>09:30 – 10:00</b><span>MangoBoost와 인사 나누기</span></p>
+          <p>HR팀과 마주 앉아 반가운 환영 인사를 나눕니다.</p>
+          <p>오시는 길은 괜찮았는지, 입사 전 궁금했던 건 없었는지 편하게 이야기 나누고, 이어서 MangoBoost에서 함께 일하기 위해 알아 두면 좋은 Basic Rules를 안내해 드립니다.</p>
+          <p>이날 자료는 공유 파일로 모두 드리니, 편하게 들어 주세요.</p>
+        </div>
+      </div>
     </li>
 
     <li class="scene">
-      <p class="label">Scene 3</p>
-      <h2>나의 첫 업무 장비 💻</h2>
-      <p class="time"><b>10:00 – 10:30</b><span>업무 장비 받기 &amp; 보안교육</span></p>
-      <p>Infra팀에게서 앞으로 함께할 PC를 받습니다. 이제 정말 MangoBoost의 일원이 된 것 같은 순간이에요.</p>
-      <p>MangoBoost의 소중한 기술을 지키기 위한 보안교육도 이때 함께 듣게 됩니다.</p>
-      <p>교육을 마치면 정식 MangoBoost 계정이 열립니다. 🔓</p>
+      <div class="num"><small>SCENE</small>03</div>
+      <div class="body">
+        <h2>나의 첫 업무 장비 💻</h2>
+        <div class="slot">
+          <p class="when"><b>10:00 – 10:30</b><span>업무 장비 받기 &amp; 보안교육</span></p>
+          <p>Infra팀에게서 앞으로 함께할 PC를 받습니다. 이제 정말 MangoBoost의 일원이 된 것 같은 순간이에요.</p>
+          <p>MangoBoost의 소중한 기술을 지키기 위한 보안교육도 이때 함께 듣게 됩니다.</p>
+          <p>교육을 마치면 정식 MangoBoost 계정이 열립니다. 🔓</p>
+        </div>
+      </div>
     </li>
 
     <li class="scene">
-      <p class="label">Scene 4</p>
-      <h2>회사 지도 완성하기 🗺️</h2>
-      <p class="time"><b>10:30 – 11:30</b><span>사무실 둘러보기</span></p>
-      <p>OS(Operation Support)팀과 함께 회사 공간과 자산을 어떻게 사용하는지 알아봅니다.</p>
-      <p>필요한 자산을 신청하는 방법, 그룹웨어 계정 사용법부터 오피스 생활 매너까지, 낯선 공간과 업무 환경이 조금씩 머릿속에 그려질 거예요.</p>
-    </li>
-
-    <li class="scene team">
-      <p class="label">Scene 5</p>
-      <h2>드디어, 내 자리 🎁</h2>
-      <p class="time"><b>11:30</b><span>첫 자리에 도착하기</span></p>
-      <p>사무실을 한 바퀴 둘러보고 처음으로 내 자리에 도착하면, 꽉 찬 책상이 기다리고 있습니다. 팀원들과 반갑게 인사를 나누고, 기회가 되면 같은 층을 쓰는 동료들과도 인사를 나눠 봐요.</p>
-    </li>
-
-    <li class="scene team">
-      <p class="label">Scene 6</p>
-      <h2>팀과의 첫 점심 🍽️</h2>
-      <p class="time"><b>12:00</b><span>팀원들과 첫 점심</span></p>
-      <p>앞으로 함께할 팀원들과 첫 점심을 먹습니다. 첫날 메뉴는 가장 드시고 싶은 걸로 골라 주세요! 결제는 식대 앱 비플페이로 함께 해 봅니다. 팀원 이름을 하나씩 넣어 '같이 사용하기'를 하는 게 처음엔 낯설 수 있지만, 몇 번 하다 보면 금방 익숙해집니다. 커피까지 회사가 쏩니다! ☕</p>
-      <p>회사까지 얼마나 걸리는지, 쉴 때는 주로 무엇을 하는지, 팀원분들은 언제 합류했는지 이야기 나누다 보면 어느새 서로를 알아가게 될 거예요.</p>
-    </li>
-
-    <li class="scene team">
-      <p class="label">Scene 7</p>
-      <h2>선물 상자를 열어 볼 시간 🎁</h2>
-      <p class="time"><b>13:00 – 14:00</b><span>웰컴키트 열어 보기</span></p>
-      <p>점심을 먹고 자리로 돌아오면, 드디어 미뤄 둔 선물 상자를 열 시간입니다.</p>
-      <p>앞으로 MangoBoost에서 함께할 물건들을 하나씩 꺼내 보고, 자리도 내 스타일대로 정리해 봅니다.</p>
-    </li>
-
-    <li class="scene">
-      <p class="label">Scene 8</p>
-      <h2>그리고, 오후는… ✨</h2>
-      <p class="time"><b>14:00 – 16:00</b><span>인사 제도 알아보기</span></p>
-      <p>HR팀과 함께 인사 제도를 좀 더 자세히 알아봅니다.</p>
-      <p>급여일, 휴가, MangoBoost의 복리후생까지 꼼꼼히 안내해 드릴게요.</p>
-      <div class="sub">
-        <p class="time"><b>16:00 –</b><span>근로계약서 작성하기</span></p>
-        <p>오리엔테이션이 끝나면, 담당자분과 함께 근로계약서를 작성합니다. 궁금한 점은 이때 편하게 물어봐 주세요.</p>
-        <p class="note">일정에 따라 근로계약서 작성 시간은 조금 달라질 수 있습니다.</p>
+      <div class="num"><small>SCENE</small>04</div>
+      <div class="body">
+        <h2>회사 지도 완성하기 🗺️</h2>
+        <div class="slot">
+          <p class="when"><b>10:30 – 11:30</b><span>사무실 둘러보기</span></p>
+          <p>OS(Operation Support)팀과 함께 회사 공간과 자산을 어떻게 사용하는지 알아봅니다.</p>
+          <p>필요한 자산을 신청하는 방법, 그룹웨어 계정 사용법부터 오피스 생활 매너까지, 낯선 공간과 업무 환경이 조금씩 머릿속에 그려질 거예요.</p>
+        </div>
       </div>
     </li>
 
     <li class="scene team">
-      <p class="label">Scene 9</p>
-      <h2>진짜 우리 팀으로 🤝</h2>
-      <p class="time"><b>After OT session</b><span>팀 합류 &amp; 첫날 마무리</span></p>
-      <p>이제 진짜 우리 팀으로 갑니다. 업무 툴에 하나씩 접속해 보고, 팀 공유 문서를 보면서 조금씩 흐름을 파악해 봅니다. 나의 버디가 누구인지도 꼭 확인해 주세요! 버디는 앞으로 3개월 동안 사소한 질문부터 업무 적응까지 곁에서 도와줄 든든한 동료입니다.</p>
-      <p>긴장했던 하루가 끝나면, 얼른 퇴근하세요!<br>아마 그날 밤엔 잠이 쏟아질 거예요. 😴</p>
+      <div class="num"><small>SCENE</small>05</div>
+      <div class="body">
+        <span class="tag">WITH MY TEAM</span>
+        <h2>드디어, 내 자리 🎁</h2>
+        <div class="slot">
+          <p class="when"><b>11:30</b><span>첫 자리에 도착하기</span></p>
+          <p>사무실을 한 바퀴 둘러보고 처음으로 내 자리에 도착하면, 꽉 찬 책상이 기다리고 있습니다. 팀원들과 반갑게 인사를 나누고, 기회가 되면 같은 층을 쓰는 동료들과도 인사를 나눠 봐요.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="scene team">
+      <div class="num"><small>SCENE</small>06</div>
+      <div class="body">
+        <span class="tag">WITH MY TEAM</span>
+        <h2>팀과의 첫 점심 🍽️</h2>
+        <div class="slot">
+          <p class="when"><b>12:00</b><span>팀원들과 첫 점심</span></p>
+          <p>앞으로 함께할 팀원들과 첫 점심을 먹습니다. 첫날 메뉴는 가장 드시고 싶은 걸로 골라 주세요! 결제는 식대 앱 비플페이로 함께 해 봅니다. 팀원 이름을 하나씩 넣어 '같이 사용하기'를 하는 게 처음엔 낯설 수 있지만, 몇 번 하다 보면 금방 익숙해집니다. 커피까지 회사가 쏩니다! ☕</p>
+          <p>회사까지 얼마나 걸리는지, 쉴 때는 주로 무엇을 하는지, 팀원분들은 언제 합류했는지 이야기 나누다 보면 어느새 서로를 알아가게 될 거예요.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="scene team">
+      <div class="num"><small>SCENE</small>07</div>
+      <div class="body">
+        <span class="tag">WITH MY TEAM</span>
+        <h2>선물 상자를 열어 볼 시간 🎁</h2>
+        <div class="slot">
+          <p class="when"><b>13:00 – 14:00</b><span>웰컴키트 열어 보기</span></p>
+          <p>점심을 먹고 자리로 돌아오면, 드디어 미뤄 둔 선물 상자를 열 시간입니다.</p>
+          <p>앞으로 MangoBoost에서 함께할 물건들을 하나씩 꺼내 보고, 자리도 내 스타일대로 정리해 봅니다.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="scene">
+      <div class="num"><small>SCENE</small>08</div>
+      <div class="body">
+        <h2>그리고, 오후는… ✨</h2>
+        <div class="slot">
+          <p class="when"><b>14:00 – 16:00</b><span>인사 제도 알아보기</span></p>
+          <p>HR팀과 함께 인사 제도를 좀 더 자세히 알아봅니다.</p>
+          <p>급여일, 휴가, MangoBoost의 복리후생까지 꼼꼼히 안내해 드릴게요.</p>
+        </div>
+        <div class="slot">
+          <p class="when"><b>16:00 –</b><span>근로계약서 작성하기</span></p>
+          <p>오리엔테이션이 끝나면, 담당자분과 함께 근로계약서를 작성합니다. 궁금한 점은 이때 편하게 물어봐 주세요.</p>
+          <p class="note">일정에 따라 근로계약서 작성 시간은 조금 달라질 수 있습니다.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="scene team">
+      <div class="num"><small>SCENE</small>09</div>
+      <div class="body">
+        <span class="tag">WITH MY TEAM</span>
+        <h2>진짜 우리 팀으로 🤝</h2>
+        <div class="slot">
+          <p class="when"><b>After OT session</b><span>팀 합류 &amp; 첫날 마무리</span></p>
+          <p>이제 진짜 우리 팀으로 갑니다. 업무 툴에 하나씩 접속해 보고, 팀 공유 문서를 보면서 조금씩 흐름을 파악해 봅니다. 나의 버디가 누구인지도 꼭 확인해 주세요! 버디는 앞으로 3개월 동안 사소한 질문부터 업무 적응까지 곁에서 도와줄 든든한 동료입니다.</p>
+          <p>긴장했던 하루가 끝나면, 얼른 퇴근하세요!<br>아마 그날 밤엔 잠이 쏟아질 거예요. 😴</p>
+        </div>
+      </div>
     </li>
   </ol>
+</main>
 
-  <footer>
-    궁금한 점은 HR팀 선우은희(<a href="mailto:eunhee.seonwoo@mangoboost.io">eunhee.seonwoo@mangoboost.io</a>)에게 편하게 물어봐 주세요.
-  </footer>
-</div>
+<div class="stripe"></div>
+<footer class="end">
+  <strong>See you on Day One.</strong>
+  궁금한 점은 HR팀 선우은희(<a href="mailto:eunhee.seonwoo@mangoboost.io">eunhee.seonwoo@mangoboost.io</a>)에게 편하게 물어봐 주세요.
+</footer>
 
 </body>
 </html>
