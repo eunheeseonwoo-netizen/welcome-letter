@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MangoBoost 첫 출근 날 예고편</title>
+<title>망고부스터의 첫 출근 날 예고편 · MangoBoost</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,7 +63,7 @@
   <div class="bar"></div>
   <header>
     <p class="eyebrow">MangoBoost HR팀</p>
-    <h1><span id="who">MangoBoost</span> 첫 출근 날 예고편</h1>
+    <h1>망고부스터의 첫 출근 날 예고편</h1>
     <p class="intro">첫날 어떤 하루를 보내게 될지, 장면별로 미리 보여 드릴게요.</p>
   </header>
 
@@ -152,23 +152,5 @@
   </footer>
 </div>
 
-<script>
-  // ?to=<이름 base64url> 이 있으면 "○○님의 첫 출근 날 예고편"으로 표시 (편지와 같은 방식)
-  (function () {
-    try {
-      var code = new URLSearchParams(location.search).get('to');
-      if (!code) return;
-      var b64 = code.replace(/-/g, '+').replace(/_/g, '/');
-      while (b64.length % 4) b64 += '=';
-      var bin = atob(b64), bytes = new Uint8Array(bin.length);
-      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-      var name = new TextDecoder('utf-8', { fatal: true }).decode(bytes).trim();
-      if (name && name.length <= 20) {
-        document.getElementById('who').textContent = name + '님의';
-        document.title = name + '님의 첫 출근 날 예고편 · MangoBoost';
-      }
-    } catch (e) {}
-  })();
-</script>
 </body>
 </html>
