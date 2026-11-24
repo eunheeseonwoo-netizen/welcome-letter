@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MangoBoost CEO 환영 편지</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Brush+Script&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --desk: #CFC9BD;
+    --desk-deep: #B4AC9C;
+    --hint: #4F4B44;
+    --paper: #FCFAF5;
+    --paper-edge: #EFE9DC;
+    --ink: #2A2722;
+    --ink-soft: #5B554B;
+    --pen: #1D2C5B;
+    --gold: #D9840F;
+    --gold-soft: #F3B63B;
+    --mango-a: #FFD23F;
+    --mango-b: #F2661B;
+    --env: #141414;
+    --env-front: #1E1E1E;
+    --serif: "Gowun Batang", "Noto Serif KR", "AppleMyungjo", "Batang", serif;
+    --hand: "Nanum Brush Script", "Nanum Pen Script", cursive;
+    --latin: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+    --sign: "Mrs Saint Delafield", "Brush Script MT", cursive;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --desk: #1B1E22; --desk-deep: #0F1114; --hint: #B3AEA4; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --desk: #1B1E22; --desk-deep: #0F1114; --hint: #B3AEA4; color-scheme: dark; }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: radial-gradient(ellipse at 50% 20%, var(--desk) 0%, var(--desk-deep) 95%) fixed;
+    background-color: var(--desk);
+    color: var(--ink);
+    font-family: var(--serif);
+    -webkit-font-smoothing: antialiased;
+  }
+  body.locked { overflow: hidden; }
+  button { font: inherit; }
+  :focus-visible { outline: 2px solid var(--mango-b); outline-offset: 3px; }
+
+  /* =========================================================
+     INTRO — sealed envelope that opens
+     ========================================================= */
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: env(safe-area-inset-top, 0px) 16px env(safe-area-inset-bottom, 0px);
+    background: radial-gradient(ellipse at 50% 35%, var(--desk) 0%, var(--desk-deep) 95%);
+    transition: opacity 0.7s ease;
+  }
+  .intro.done { opacity: 0; pointer-events: none; }
+  .intro[hidden] { display: none; }
+
+  .env {
+    position: relative;
+    width: min(500px, 84vw);
+    aspect-ratio: 13 / 8;
+    margin-top: clamp(80px, 22vh, 260px);
+    perspective: 1400px;
+    border: 0;
+    padding: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.35s ease;
+  }
+  .env:not(.open):hover { transform: translateY(-4px) rotate(-0.6deg); }
+
+  .env-back {
+    position: absolute; inset: 0; z-index: 1;
+    background: var(--env);
+    border-radius: 4px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.25), 0 28px 44px -12px rgba(0,0,0,0.5);
+  }
+  .env-letter {
+    position: absolute;
+    left: 5%; right: 5%; top: 5%;
+    height: 90%;
+    z-index: 2;
+    background: var(--paper);
+    padding: 7% 8% 0;
+    overflow: hidden;
+    transition: transform 0.95s cubic-bezier(.25,.75,.2,1);
+  }
+  .env-letter::before {
+    content: ""; position: absolute; inset: 7px;
+    border: 1px solid var(--gold-soft); opacity: 0.7;
+  }
+  .env-letter .mini-mark { width: 26px; height: 26px; display: block; margin: 0 auto 6px; }
+  .env-letter .mini-hand { font-family: var(--hand); color: var(--pen); font-size: clamp(1.2rem, 4.4vw, 1.75rem); line-height: 1.1; }
+  .env-letter .lines span { display: block; height: 1px; margin: 10px 0; background: rgba(42,39,34,0.14); }
+  .env-letter .lines span:nth-child(2) { width: 86%; }
+  .env-letter .lines span:nth-child(4) { width: 70%; }
+
+  .env-front {
+    position: absolute; inset: 0; z-index: 3;
+    background: var(--env-front);
+    clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+    border-radius: 4px;
+  }
+  .env-folds { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; pointer-events: none; }
+  .env-folds line { stroke: rgba(0,0,0,0.45); stroke-width: 1; }
+  .env-folds line.hi { stroke: rgba(255,255,255,0.06); }
+
+  .env-address {
+    position: absolute; left: 0; right: 0; bottom: 7%; z-index: 4;
+    text-align: center; font-family: var(--hand); color: var(--gold-soft);
+    pointer-events: none;
+  }
+  .env-address .to { display: block; font-size: clamp(1.6rem, 5vw, 2.25rem); transform: rotate(-3deg); }
+  .env-address .from { display: block; margin-top: 2px; font-size: clamp(1.1rem, 3.2vw, 1.4rem); opacity: 0.75; }
+
+  .env-flap {
+    position: absolute; left: 0; right: 0; top: 0;
+    height: 56%;
+    z-index: 5;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(.55,0,.3,1);
+  }
+  .flap-face {
+    position: absolute; inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .flap-out { background: linear-gradient(180deg, #121212 0%, #262626 100%); }
+  .flap-in {
+    transform: rotateX(180deg);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.09) 0 2px, transparent 2px 9px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.09) 0 2px, transparent 2px 9px),
+      linear-gradient(135deg, var(--mango-a), var(--mango-b));
+  }
+
+  .seal {
+    position: absolute;
+    left: 50%; top: 56%;
+    width: clamp(48px, 12vw, 62px);
+    aspect-ratio: 1;
+    z-index: 6;
+    transform: translate(-50%, -50%);
+    transition: transform 0.4s ease, opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .seal svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.4)); }
+
+  .intro-hint {
+    margin: 34px 0 0;
+    font-size: 0.95rem;
+    color: var(--hint);
+    transition: opacity 0.3s ease;
+  }
+
+  /* opening sequence states */
+  .env.seal-off .seal { opacity: 0; transform: translate(-50%, -50%) scale(1.35) rotate(12deg); }
+  .env.open .env-flap { transform: rotateX(180deg); }
+  .env.flap-behind .env-flap { z-index: 1; }
+  .env.rise .env-letter { transform: translateY(-80%); }
+  .env.open ~ .intro-hint { opacity: 0; }
+  .no-anim, .no-anim * { transition: none !important; }
+
+  /* =========================================================
+     PAGE — the A4 letter
+     ========================================================= */
+  .page {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    transition: opacity 0.8s ease, transform 0.9s cubic-bezier(.2,.7,.2,1);
+  }
+  .page.revealed { opacity: 1; transform: none; }
+
+  .control {
+    max-width: 794px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+    display: flex; justify-content: flex-end; align-items: center; gap: 10px;
+    font-size: 0.85rem; color: var(--hint);
+  }
+  .control[hidden] { display: none; }
+  .control label { white-space: nowrap; }
+  .control input {
+    font: inherit; color: var(--ink);
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(0,0,0,0.15); border-radius: 4px;
+    padding: 6px 10px; width: 9em;
+  }
+
+  .stage { padding: 28px 16px 24px; }
+  .sheet-wrap {
+    --s: 1;
+    width: calc(794px * var(--s));
+    height: calc(1123px * var(--s));
+    margin: 0 auto;
+  }
+  .letter {
+    position: relative;
+    width: 794px; height: 1123px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    padding: 54px 76px 50px;
+    transform-origin: top left;
+    transform: scale(var(--s));
+    background-color: var(--paper);
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .25  0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+      repeating-linear-gradient(90deg, transparent 0 3px, rgba(120,100,60,0.022) 3px 4px),
+      radial-gradient(ellipse at 50% 40%, var(--paper) 55%, var(--paper-edge) 100%);
+    box-shadow: 0 1px 1px rgba(40,30,10,0.08), 0 6px 14px rgba(40,30,10,0.10), 0 24px 48px -12px rgba(30,22,8,0.28);
+  }
+  .letter::before, .letter::after { content: ""; position: absolute; pointer-events: none; border: 1px solid var(--gold-soft); }
+  .letter::before { inset: 18px; opacity: 0.9; }
+  .letter::after  { inset: 23px; opacity: 0.45; }
+
+  .watermark { position: absolute; left: 50%; top: 50%; width: 44%; transform: translate(-50%, -50%); opacity: 0.05; pointer-events: none; }
+
+  .letterhead { text-align: center; margin-bottom: 16px; }
+  .letterhead .mark { width: 40px; height: 40px; display: block; margin: 0 auto 6px; filter: drop-shadow(0 2px 4px rgba(242,102,27,0.25)); }
+  .wordmark { font-family: var(--latin); font-style: italic; font-size: 1.3rem; letter-spacing: 0.04em; color: var(--gold); margin: 0; }
+  .letterhead .rule { width: 56px; height: 1px; margin: 8px auto 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+
+  .salutation { font-family: var(--hand); font-size: 30px; line-height: 1.1; color: var(--pen); margin: 0 0 10px; transform: rotate(-2deg); transform-origin: left; }
+  .lead { font-size: 17px; font-weight: 700; line-height: 1.6; margin: 0 0 12px; word-break: keep-all; }
+  .body p { font-size: 13.4px; line-height: 1.74; margin: 0 0 0.62em; word-break: keep-all; color: var(--ink); }
+  .recipient { white-space: nowrap; }
+
+  .values {
+    margin: 0.8em 0 0.9em; padding: 10px 0;
+    border-top: 1px solid rgba(217,132,15,0.25);
+    border-bottom: 1px solid rgba(217,132,15,0.25);
+    list-style: none; display: grid; gap: 0.55em;
+  }
+  .values li { display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: baseline; }
+  .values h3 { margin: 0; font-family: var(--latin); font-style: italic; font-weight: 500; font-size: 16.5px; line-height: 1.3; color: var(--gold); }
+  .values p { margin: 0; line-height: 1.66; }
+
+  .closing { margin-top: auto; padding-top: 6px; text-align: right; }
+  .closing .company { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 2px; letter-spacing: 0.02em; }
+  .signature { position: relative; display: inline-block; padding: 0 0.2em 0.35em 1.4em; }
+  .signature .flourish-latin { position: absolute; right: 0.4em; top: -0.5em; font-family: var(--sign); font-size: 44px; color: var(--pen); opacity: 0.16; transform: rotate(-8deg); white-space: nowrap; pointer-events: none; }
+  .signature .name { position: relative; font-family: var(--hand); font-size: 46px; line-height: 1; color: var(--pen); display: inline-block; letter-spacing: -0.01em; transform: rotate(-6deg) skewX(-6deg); text-shadow: 0 0 0.6px rgba(29,44,91,0.6); }
+  .signature svg { position: absolute; left: 0.6em; right: -0.2em; bottom: -0.15em; width: calc(100% - 0.4em); height: 0.9em; overflow: visible; }
+  .signature path { fill: none; stroke: var(--pen); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 0; }
+  .js .signature .name { clip-path: inset(0 100% 0 0); }
+  .js .signature path { stroke-dashoffset: 520; }
+  .js .signature.written .name { animation: write 1.6s cubic-bezier(.45,.05,.4,1) forwards; }
+  .js .signature.written path  { animation: stroke 0.9s 1.4s ease-out forwards; }
+  @keyframes write { to { clip-path: inset(0 -10% 0 0); } }
+  @keyframes stroke { to { stroke-dashoffset: 0; } }
+
+  .after { display: flex; justify-content: center; gap: 10px; padding: 8px 16px 64px; }
+  .after button {
+    color: var(--hint); background: transparent;
+    border: 1px solid currentColor; border-radius: 999px;
+    padding: 9px 18px; font-size: 0.9rem; cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .env, .env-letter, .env-flap, .seal, .page, .intro { transition: none !important; }
+    .js .signature .name { clip-path: none; animation: none !important; }
+    .js .signature path { stroke-dashoffset: 0; animation: none !important; }
+  }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    html, body { width: 210mm; height: 297mm; background: #fff; }
+    .intro, .control, .after { display: none !important; }
+    .page { opacity: 1 !important; transform: none !important; }
+    .stage { padding: 0; }
+    .sheet-wrap { width: 210mm; height: 297mm; }
+    .letter { box-shadow: none; transform: none; width: 210mm; height: 297mm; }
+    .js .signature .name { clip-path: none; }
+    .js .signature path { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body class="locked">
+
+<!-- MangoBoost rocket mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mb-rocket" viewBox="0 0 100 100">
+    <path d="M40 71 C 31 62, 28 47, 36 34 C 45 20, 60 13, 72 16 C 78 29, 76 46, 66 59 C 60 66, 54 70, 48 72" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="61" cy="33" r="4.5" fill="currentColor"/>
+    <path d="M48 63 C 47 74, 43 83, 35 91 C 36 81, 38 72, 42 65 Z" fill="currentColor"/>
+    <path d="M34 70 L 26 81 L 33 80 Z" fill="currentColor"/>
+    <path d="M53 77 L 51 90 L 56 85 Z" fill="currentColor"/>
+  </symbol>
+  <linearGradient id="mb-grad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFD23F"/>
+    <stop offset="1" stop-color="#F2661B"/>
+  </linearGradient>
+</svg>
+
+<!-- ============ INTRO ============ -->
+<section class="intro" id="intro" aria-label="편지 봉투">
+  <button class="env" id="env" type="button" aria-label="봉투를 열어 편지 읽기">
+    <div class="env-back"></div>
+    <div class="env-letter" aria-hidden="true">
+      <svg class="mini-mark" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="url(#mb-grad)"/><use href="#mb-rocket" x="12" y="12" width="76" height="76" color="#fff"/></svg>
+      <div class="mini-hand"><span data-recipient>이름</span> 님께,</div>
+      <div class="lines"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="env-front"></div>
+    <svg class="env-folds" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="0" y1="100" x2="38" y2="44"/>
+      <line x1="100" y1="100" x2="62" y2="44"/>
+    </svg>
+    <div class="env-address" aria-hidden="true">
+      <span class="to">To. <span data-recipient>이름</span> 님</span>
+      <span class="from">From. 김장우</span>
+    </div>
+    <div class="env-flap" aria-hidden="true">
+      <div class="flap-face flap-out"></div>
+      <div class="flap-face flap-in"></div>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 64 64">
+        <path d="M32 3c5 0 7 3 11 4s8 0 10 4 0 7 2 11 5 6 5 10-3 6-5 10 0 8-2 11-6 3-10 4-6 4-11 4-7-3-11-4-8 0-10-4 0-7-2-11-5-6-5-10 3-6 5-10 0-8 2-11 6-3 10-4 6-4 11-4z" fill="#E0701E"/>
+        <circle cx="32" cy="32" r="20" fill="none" stroke="#9C4410" stroke-width="1.4"/>
+        <circle cx="32" cy="32" r="20" fill="none" stroke="#F7A35C" stroke-width="0.6" transform="translate(-0.6 -0.6)" opacity=".7"/>
+        <use href="#mb-rocket" x="16" y="16" width="32" height="32" color="#9C4410"/>
+        <ellipse cx="25" cy="18" rx="6" ry="3" fill="#fff" opacity=".12" transform="rotate(-25 25 18)"/>
+      </svg>
+    </div>
+  </button>
+  <p class="intro-hint">봉투를 눌러 편지를 열어 보세요</p>
+</section>
+
+<!-- ============ LETTER ============ -->
+<div class="page" id="page">
+  <div class="control" id="control" hidden>
+    <label for="recipientInput">미리보기 이름</label>
+    <input id="recipientInput" type="text" value="이름" autocomplete="off">
+  </div>
+
+  <main class="stage">
+    <div class="sheet-wrap" id="sheetWrap">
+      <article class="letter" id="letter" aria-label="MangoBoost CEO 환영 편지">
+        <svg class="watermark" viewBox="0 0 100 100" aria-hidden="true"><use href="#mb-rocket" color="#9a5a10"/></svg>
+        <header class="letterhead">
+          <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+            <rect width="100" height="100" rx="22" fill="url(#mb-grad)"/>
+            <use href="#mb-rocket" x="12" y="12" width="76" height="76" color="#ffffff"/>
+          </svg>
+          <p class="wordmark">MangoBoost</p>
+          <div class="rule"></div>
+        </header>
+        <p class="salutation"><span class="recipient" data-recipient>이름</span> 님께,</p>
+    <div class="body">
+      <p class="lead">곧 다가올 첫 출근을 진심으로 환영합니다.</p>
+
+      <p>먼저 MangoBoost의 여정에 함께해 주셔서 고맙습니다. 새 회사에 첫발을 들이는 날의 설렘과 긴장을 저도 생생히 기억합니다. 저에게는 그날이 MangoBoost를 처음 시작한 날이었으니까요.</p>
+
+      <p>문득 이 길을 처음 시작하던, 오래전 공부하던 시절이 떠오릅니다.</p>
+
+      <p>밤을 새워가며 논문을 파고들던 때, 제 머릿속을 떠나지 않던 질문은 하나였습니다. “컴퓨팅의 한계를 뛰어넘는 진짜 기술을 우리 손으로 만들어낼 수 있을까?” 책상 앞에서 막연하게 품었던 그 작은 호기심과 집념이 쌓여, 2022년 몇 명의 제자, 동료들과 함께 MangoBoost라는 이름으로 세상에 첫발을 내딛게 되었습니다.</p>
+
+      <p>‘우리 손으로 만든 독보적인 기술로 세계 시장에서 당당히 경쟁하겠다’는 그 목표만큼은 공부하던 시절부터 지금까지 한 번도 흔들린 적이 없습니다. 달라진 게 있다면, 이제는 혼자가 아니라 곧 <span class="recipient" data-recipient>이름</span> 님과 함께 답을 찾아가는 여정이 되었다는 점입니다.</p>
+
+      <p>저희가 일하는 방식은 네 가지 가치로 정리할 수 있습니다.</p>
+
+      <ul class="values">
+        <li>
+          <h3>Top Talent</h3>
+          <p><span class="recipient" data-recipient>이름</span> 님이 이 자리에 계신 이유이기도 합니다. 옆자리 동료들도 같은 기준으로 함께하게 된 분들입니다. 마음껏 배우시고, 언젠가는 그 동료들을 뛰어넘어 주셨으면 합니다.</p>
+        </li>
+        <li>
+          <h3>Innovative Technology</h3>
+          <p>‘이 정도면 됐다’ 싶은 제품을 만드는 것이 아닌, 기술로 압도적인 경쟁력을 갖는 것이 저희 목표입니다. 쉬운 방법과 옳은 방법 사이에서 고민될 때 이 가치를 떠올려 주세요.</p>
+        </li>
+        <li>
+          <h3>Commitment</h3>
+          <p>높은 기준을 추구하다 보면 처음 몇 달은 낯설고 치열하게 느껴지실 수도 있습니다. 하지만 그 기준 덕분에 저희가 여기까지 올 수 있었고, 곁에서 함께 버텨주는 동료들이 있기에 혼자서는 못 할 일도 해낼 수 있었습니다.</p>
+        </li>
+        <li>
+          <h3>One Team</h3>
+          <p>저희는 서로를 믿으며 일합니다. 함께 고민해서 더 좋은 답을 찾는 팀이 되고 싶습니다.</p>
+        </li>
+      </ul>
+
+      <p>마지막으로 부탁드리고 싶은 게 하나 있습니다. 지금은 회사를 가장 새로운 눈으로 볼 수 있는 때입니다. 몇 달 지나 익숙해지면 보이지 않을 것들이 지금은 보이실 겁니다. 더 나아질 수 있는 방법이라고 생각하시는 게 있다면 편하게 말씀해 주세요. 언제든 환영입니다.</p>
+
+      <p>MangoBoost의 지난 시간은 제 작은 목표에서 시작됐지만, 앞으로의 이야기는 지금 이 글을 읽고 계신 분들이 함께 만들어 가게 될 겁니다. 그 길을 함께 걷게 되어 정말 기쁩니다.</p>
+
+      <p>다시 한번, 진심으로 환영합니다.</p>
+    </div>
+
+    <footer class="closing">
+      <p class="company">MangoBoost CEO</p>
+      <div class="signature" id="signature">
+        <span class="flourish-latin" aria-hidden="true">Jangwoo Kim</span>
+        <span class="name">김장우 드림</span>
+        <svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M4 12 C 40 4, 80 18, 120 9 S 175 6, 196 3"/>
+        </svg>
+      </div>
+    </footer>
+
+      </article>
+    </div>
+  </main>
+
+  <div class="after">
+    <button type="button" id="replayBtn">봉투에 다시 넣기</button>
+    <button type="button" id="printBtn">인쇄</button>
+  </div>
+</div>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  /* ---------------------------------------------------------
+     받는 분 이름 — 명단은 이 파일에 없습니다.
+     각자의 링크에 그 사람 이름만 인코딩되어 들어갑니다.
+     - ?to=코드   : 이름(UTF-8)을 base64url로 인코딩한 값 (추천)
+     - #코드      : ?to= 와 같고, 쿼리를 쓸 수 없는 곳에서 사용
+     - ?n=이름    : 이름을 링크에 그대로 넣습니다
+     링크에 이름이 없으면 미리보기 입력칸이 나타납니다.
+     --------------------------------------------------------- */
+  const targets = document.querySelectorAll('[data-recipient]');
+  function applyName(v) {
+    const name = (v || '').trim() || '이름';
+    targets.forEach(el => { el.textContent = name; });
+  }
+
+  function decodeName(code) {
+    try {
+      let b64 = code.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      const bin = atob(b64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      const name = new TextDecoder('utf-8', { fatal: true }).decode(bytes).trim();
+      return name && name.length <= 20 ? name : null;
+    } catch (e) { return null; }
+  }
+
+  function nameFromLink() {
+    let params;
+    try { params = new URLSearchParams(location.search); } catch (e) { params = null; }
+    const code = (params && params.get('to')) || location.hash.replace(/^#/, '');
+    if (code) { const decoded = decodeName(code); if (decoded) return decoded; }
+    const direct = params && params.get('n');
+    return direct ? direct.trim().slice(0, 20) : null;
+  }
+
+  const linkedName = nameFromLink();
+  if (linkedName) {
+    applyName(linkedName);
+  } else {
+    const control = document.getElementById('control');
+    const input = document.getElementById('recipientInput');
+    control.hidden = false;
+    try { const saved = localStorage.getItem('mb-letter-recipient'); if (saved) input.value = saved; } catch (e) {}
+    applyName(input.value);
+    input.addEventListener('input', () => {
+      applyName(input.value);
+      try { localStorage.setItem('mb-letter-recipient', input.value); } catch (e) {}
+    });
+  }
+
+  /* --------- A4 sheet fits the screen width --------- */
+  const wrap = document.getElementById('sheetWrap');
+  function fit() {
+    const s = Math.min(1, (document.documentElement.clientWidth - 32) / 794);
+    wrap.style.setProperty('--s', s.toFixed(4));
+  }
+  fit();
+  window.addEventListener('resize', fit);
+
+  /* --------- opening sequence --------- */
+  const intro = document.getElementById('intro');
+  const env = document.getElementById('env');
+  const page = document.getElementById('page');
+  const sig = document.getElementById('signature');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+  let busy = false;
+  let sigObserved = false;
+
+  function watchSignature() {
+    if (sigObserved) return;
+    sigObserved = true;
+    if (!('IntersectionObserver' in window)) { sig.classList.add('written'); return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { sig.classList.add('written'); io.disconnect(); } });
+    }, { threshold: 0.8 });
+    io.observe(sig);
+  }
+
+  async function openEnvelope() {
+    if (busy || env.classList.contains('open')) return;
+    busy = true;
+    env.classList.add('seal-off');
+    await wait(350);
+    env.classList.add('open');
+    await wait(400);
+    env.classList.add('flap-behind');
+    await wait(450);
+    env.classList.add('rise');
+    await wait(1250);
+    window.scrollTo(0, 0);
+    page.classList.add('revealed');
+    intro.classList.add('done');
+    document.body.classList.remove('locked');
+    await wait(750);
+    intro.hidden = true;
+    watchSignature();
+    busy = false;
+  }
+
+  function replay() {
+    if (busy) return;
+    intro.classList.add('no-anim');
+    env.classList.remove('seal-off', 'open', 'flap-behind', 'rise');
+    intro.hidden = false;
+    void intro.offsetWidth;
+    intro.classList.remove('no-anim');
+    intro.classList.remove('done');
+    page.classList.remove('revealed');
+    document.body.classList.add('locked');
+    env.focus({ preventScroll: true });
+  }
+
+  env.addEventListener('click', openEnvelope);
+  document.getElementById('replayBtn').addEventListener('click', replay);
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+  window.addEventListener('beforeprint', () => { sig.classList.add('written'); });
+</script>
+</body>
+</html>
